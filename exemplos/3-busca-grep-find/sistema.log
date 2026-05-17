@@ -1,0 +1,21 @@
+2024-05-15 10:32:15 INFO Sistema iniciado com sucesso
+2024-05-15 10:33:42 INFO Banco de dados conectado
+2024-05-15 10:45:23 WARN Memória disponível abaixo de 512MB
+2024-05-15 11:02:10 ERROR Falha ao processar arquivo entrada.csv
+2024-05-15 11:02:10 ERROR Stack trace: File not found
+2024-05-15 11:15:33 INFO Limpeza de cache iniciada
+2024-05-15 11:16:02 INFO Limpeza de cache concluída
+2024-05-15 11:30:45 WARN Timeout em conexão com API externa
+2024-05-15 11:30:46 ERROR Tentativa 1 de reconexão falhou
+2024-05-15 11:30:56 ERROR Tentativa 2 de reconexão falhou
+2024-05-15 11:31:06 INFO Reconexão bem-sucedida após 3 tentativas
+2024-05-15 12:00:00 INFO Backup automático iniciado
+2024-05-15 12:15:33 INFO Backup automático concluído com sucesso
+2024-05-15 14:22:11 WARN Disco rígido 85% cheio
+2024-05-15 14:23:00 ERROR Serviço de email não respondendo
+2024-05-15 14:23:15 INFO Serviço de email reiniciado
+2024-05-15 15:00:00 INFO Sincronização com servidor remoto iniciada
+2024-05-15 15:45:33 ERROR Erro ao sincronizar arquivo_grande.dat
+2024-05-15 15:45:34 INFO Tentando novamente...
+2024-05-15 15:46:02 INFO Sincronização retomada
+2024-05-15 16:30:00 INFO Sistema em estado normal

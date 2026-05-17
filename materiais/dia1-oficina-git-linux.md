@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="figuras/logo-paradevs.png" alt="Logo Paradevs" width="240">
+</p>
+
 # Oficina de Git & Linux
 ### UFERSA — Campus Pau dos Ferros
 **ECOP · 17 e 18 de Maio de 2026 · 14h–16h · Laboratório 2 - LTI**

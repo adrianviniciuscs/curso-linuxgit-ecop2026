@@ -1,0 +1,11 @@
+id,nome,email,status
+1,João Silva,joao@example.com,ativo
+2,Maria Santos,maria@example.com,ativo
+3,Pedro Oliveira,pedro@example.com,inativo
+4,Ana Costa,ana@example.com,ativo
+5,Carlos Mendes,carlos@example.com,bloqueado
+6,Lucia Ferreira,lucia@example.com,ativo
+7,Roberto Alves,roberto@example.com,inativo
+8,Fernanda Rocha,fernanda@example.com,ativo
+9,Thiago Silva,thiago@example.com,ativo
+10,Juliana Santos,juliana@example.com,bloqueado
