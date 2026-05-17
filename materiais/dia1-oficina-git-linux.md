@@ -49,7 +49,7 @@ Para entender o Linux, precisamos voltar um pouco mais no tempo.
 
 Em 1969, pesquisadores da Bell Labs (laboratório de pesquisa da AT&T) criaram um sistema operacional chamado **Unix**. Ele era elegante, modular e poderoso — e introduziu conceitos que usamos até hoje: tudo é arquivo, processos se comunicam por pipes, usuários têm permissões. O problema: era caro e proprietário.
 
-![Unix rodando em um terminal antigo](figuras/unix-1969.jpg)
+<img src="figuras/unix-1969.jpg" alt="Unix" width="500">
 
 ### O Projeto GNU — a revolução filosófica (1983)
 
@@ -57,11 +57,11 @@ Em 1983, **Richard Stallman**, pesquisador do MIT, lançou o **Projeto GNU** com
 
 O projeto GNU tinha quase tudo — menos o componente central: o **kernel** (o núcleo do sistema que faz a comunicação com o hardware).
 
-![Arquitetura do Kernel](figuras/arquiteturakernel.png)
+<img src="figuras/arquiteturakernel.png" alt="Arquitetura do Kernel" width="500">
 
 ### Linus Torvalds e o kernel Linux (1991)
 
-![Linus Torvalds](figuras/linus1991.jpg)
+<img src="figuras/linus1991.jpg" alt="Linus Torvalds" width="500">
 
 Em 1991, um estudante finlandês de 21 anos chamado **Linus Torvalds** publicou numa lista de e-mails:
 
@@ -148,7 +148,7 @@ O kernel Linux usa GPL. A maioria das ferramentas que você vai instalar usa MIT
 
 ## 3. Distribuições Linux
 
-![Distros Linux](figuras/linux-distros.jpg)
+<img src="figuras/linux-distros.jpg" alt="Distros Linux" width="500">
 
 O kernel Linux sozinho não é um sistema operacional utilizável — é só o núcleo. Uma **distribuição (distro)** é o kernel Linux empacotado junto com um conjunto de softwares, um gerenciador de pacotes, uma interface gráfica e configurações padrão.
 
