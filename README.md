@@ -1,4 +1,6 @@
-# <div align="center">![Paradevs](materiais/figuras/logo-paradevs.png)</div>
+<div align="center">
+  <img src="materiais/figuras/logo-paradevs.png" alt="Logo Paradevs" width="180">
+</div>
 
 <div align="center">
 
@@ -72,4 +74,3 @@ bash reset.sh
 ```
 
 Isso limpa os arquivos criados nos exercícios sem apagar os dados de prática.
-
