@@ -1,59 +1,90 @@
 <div align="center">
-  <img src="materiais/figuras/logo-paradevs.png" alt="Logo Paradevs" width="160">
-</div>
-
-<div align="center">
+  <img src="materiais/figuras/logo-paradevs.png" alt="Logo Paradevs" width="170">
 
 # Oficina de Git & Linux
 
-**ECOP · UFERSA — Campus Pau dos Ferros**
+**ECOP · UFERSA Campus Pau dos Ferros** · **Paradevs**  
 
-Material oficial da oficina, com teoria, prática guiada, exercícios e referências rápidas.
-
+Material oficial da oficina com conteúdo teórico, prática guiada, exercícios e referência rápida.
 </div>
 
 ---
 
-## O que tem neste repositório
+## Navegação rápida
 
-| Pasta / arquivo | Conteúdo |
-|---|---|
-| `materiais/dia1-oficina-git-linux.md` | Material completo do Dia 1 |
-| `materiais/dia2-oficina-git-linux.md` | Material completo do Dia 2 |
-| `exemplos/` | Exercícios práticos, exemplos e dados de apoio |
-| `exemplos/reset.sh` | Script para limpar os arquivos gerados nos exercícios |
-| `materiais/Cheatsheet Git & Linux — Oficina UFERSA.pdf` | Cheatsheet de consulta rápida |
-| `materiais/Linux & Git - Dia 1.pdf` | Slides de Apresentação do Dia 1 |
+- [Visão geral](#visão-geral)
+- [Estrutura do repositório](#estrutura-do-repositório)
+- [Como estudar este material](#como-estudar-este-material)
+- [Guia rápido de uso](#guia-rápido-de-uso)
+- [Reset dos exercícios](#reset-dos-exercícios)
 
 ---
 
-## Como usar
+## Visão geral
 
-1. Leia o `.md` do dia.
-2. Faça os exercícios na pasta `exemplos/`.
-3. Use o cheatsheet como consulta rápida.
+Este repositório foi organizado para apoiar os dois dias da oficina:
+
+| Dia | Foco | Material principal |
+|---|---|---|
+| **Dia 1** | Linux, terminal, comandos essenciais e prática | [`materiais/dia1-oficina-git-linux.md`](materiais/dia1-oficina-git-linux.md) |
+| **Dia 2** | Git aplicado ao fluxo real de desenvolvimento | [`materiais/dia2-oficina-git-linux.md`](materiais/dia2-oficina-git-linux.md) |
 
 ---
 
-## Roteiro rápido
+## Estrutura do repositório
 
-| Etapa | Onde olhar |
+| Caminho | Descrição |
 |---|---|
-| Introdução e contexto | `materiais/dia1-oficina-git-linux.md` |
-| Prática de terminal | `exemplos/1-terminal-basico/` |
+| [`materiais/`](materiais) | Apostilas, PDFs e figuras da oficina |
+| [`materiais/dia1-oficina-git-linux.md`](materiais/dia1-oficina-git-linux.md) | Material completo do Dia 1 |
+| [`materiais/dia2-oficina-git-linux.md`](materiais/dia2-oficina-git-linux.md) | Material completo do Dia 2 |
+| [`materiais/Cheatsheet Git & Linux — Oficina UFERSA.pdf`](materiais/Cheatsheet%20Git%20%26%20Linux%20%E2%80%94%20Oficina%20UFERSA.pdf) | Cheatsheet de consulta rápida |
+| [`materiais/Linux & Git - Dia 1.pdf`](materiais/Linux%20%26%20Git%20-%20Dia%201.pdf) | Slides de apresentação |
+| [`exemplos/`](exemplos) | Exercícios práticos por tópico |
+| [`exemplos/reset.sh`](exemplos/reset.sh) | Script para limpar arquivos gerados durante a prática |
+
+---
+
+## Como estudar este material
+
+1. Comece pela apostila do **Dia 1**.
+2. Pratique em paralelo com as pastas de `exemplos/`.
+3. Avance para o **Dia 2** com base no projeto criado.
+4. Use o cheatsheet para revisão e consulta rápida.
+
+### Trilha prática sugerida
+
+| Etapa | Pasta |
+|---|---|
+| Terminal básico | `exemplos/1-terminal-basico/` |
 | Usuários e permissões | `exemplos/2-usuarios-permissoes/` |
-| Busca | `exemplos/3-busca-grep-find/` |
+| Busca com grep/find | `exemplos/3-busca-grep-find/` |
 | Pipes e encadeamento | `exemplos/4-pipes-encadeamento/` |
 | Edição de texto | `exemplos/5-edicao-nano/` |
 | Pacotes | `exemplos/6-pacotes/` |
-| Exercício final | `exemplos/exercicio-final/` |
-| Consulta rápida | `materiais/Cheatsheet Git & Linux — Oficina UFERSA.pdf` |
+| Desafio final | `exemplos/exercicio-final/` |
+
+---
+
+## Guia rápido de uso
+
+```bash
+# 1) Clonar o repositório
+git clone https://github.com/adrianviniciuscs/curso-linuxgit-ecop2026.git
+cd curso-linuxgit-ecop2026
+
+# 2) Abrir o conteúdo principal do Dia 1
+xdg-open dia1-oficina-gitlinux.pdf
+
+# 3) Ir para os exercícios
+cd exemplos
+```
 
 ---
 
 ## Reset dos exercícios
 
-Para limpar arquivos gerados durante a prática:
+Para limpar os arquivos gerados durante as práticas:
 
 ```bash
 cd exemplos
@@ -61,3 +92,8 @@ bash reset.sh
 ```
 
 ---
+
+<div align="center">
+  Feito para a <strong>Oficina de Git & Linux</strong> · UFERSA — Campus Pau dos Ferros
+
+</div>

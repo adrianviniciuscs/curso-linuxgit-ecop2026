@@ -3,7 +3,9 @@
 </p>
 
 # Oficina de Git & Linux
+
 ### UFERSA — Campus Pau dos Ferros
+
 **ECOP · 17 e 18 de Maio de 2026 · 14h–16h · Laboratório 2 - LTI**
 
 ---
@@ -36,12 +38,10 @@
 - [Referência rápida](#referência-rápida)
 - [Próximos passos](#próximos-passos)
 
-
-
 # Dia 2 — Git & GitHub
 
 **Ministrante:** Gustavo Fontes  
-**Horário:** 14h00 – 16h00  
+**Horário:** 16h00 – 18h00  
 **Pré-requisito:** ter participado do Dia 1 (ou saber navegar pelo terminal) e, de preferência, ter conta no GitHub.
 
 ---

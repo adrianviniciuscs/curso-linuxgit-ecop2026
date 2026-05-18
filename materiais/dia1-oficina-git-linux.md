@@ -3,7 +3,9 @@
 </p>
 
 # Oficina de Git & Linux
+
 ### UFERSA — Campus Pau dos Ferros
+
 **ECOP · 17 e 18 de Maio de 2026 · 14h–16h · Laboratório 2 - LTI**
 
 ---
@@ -29,8 +31,10 @@
   - [Encadeamento de comandos e pipes](#7c-encadeamento-de-comandos-e-pipes)
   - [Instalação de pacotes](#7d-instalação-de-pacotes)
   - [Exercício guiado — Organize seu projeto](#8-exercício-guiado--organize-seu-projeto)
+  - [Bash Scripting (bem básico)](#8a-bash-scripting-bem-básico)
   - [Primeiro contato com Git](#9-primeiro-contato-com-git)
   - [Aprofundado — Tópicos avançados](#aprofundado--tópicos-avançados)
+
 ---
 
 # Dia 1 — Linux & Git
@@ -195,8 +199,6 @@ Linux kernel (1991)
 
 Sim — o Android usa o kernel Linux. Isso significa que **bilhões de pessoas já usam Linux**, só que sem saber. A diferença é que o Android não usa as ferramentas GNU por cima — usa um conjunto próprio de ferramentas (Bionic, em vez do glibc, por exemplo).
 
-
-
 > **Dado:** se você contar Android, servidores, supercomputadores e dispositivos embarcados, Linux é de longe o sistema operacional mais usado no mundo. Windows domina apenas o mercado de desktops pessoais.
 
 ### Qual usar?
@@ -232,12 +234,14 @@ wsl --install -d Debian      # instalar Debian, por exemplo
 ```
 
 **Vantagens do WSL 2:**
+
 - Sem dual boot, sem formatação
 - Integração com o Windows Explorer (você acessa os arquivos Linux pelo Windows e vice-versa)
 - Funciona com VS Code (extensão Remote - WSL)
 - Kernel Linux real — não é emulação
 
 **Limitações:**
+
 - Sem interface gráfica nativa (pode ser configurada, mas é burocrático)
 - Performance de I/O um pouco inferior ao Linux nativo para alguns casos
 
@@ -277,7 +281,7 @@ Baixar a ISO de uma distro, gravar num pendrive com Rufus ou Etcher, e bootar po
 | **Killercoda** | killercoda.com | Ambientes Linux interativos gratuitos |
 | **Play with Docker** | labs.play-with-docker.com | Terminal Alpine Linux gratuito |
 
-> **Para hoje no curso:** estamos no laboratório com Linux disponível nas máquinas. Se você está com o seu notebook Windows, **recomendamos instalar o WSL 2** — é o caminho mais prático pra continuar praticando em casa depois.
+> **Para hoje na oficina:** estamos no laboratório com Linux disponível nas máquinas. Se você está com o seu notebook Windows, **recomendamos instalar o WSL 2** — é o caminho mais prático pra continuar praticando em casa depois.
 
 ---
 
@@ -359,8 +363,8 @@ root
 Para executar um comando com privilégios de admin, use `sudo` (**S**uper **U**ser **DO**):
 
 ```bash
-$ rm /etc/arquivo-sistema.conf      # ❌ Sem permissão! Erro.
-$ sudo rm /etc/arquivo-sistema.conf # ✅ Com sudo funciona
+rm /etc/arquivo-sistema.conf      # ❌ Sem permissão! Erro.
+sudo rm /etc/arquivo-sistema.conf # ✅ Com sudo funciona
 ```
 
 > **⚠️ Cuidado com `sudo`:** com poder vem responsabilidade. Não execute `sudo` em comandos que você não entende — pode quebrar o sistema.
@@ -396,17 +400,17 @@ A primeira coluna mostra **permissões**:
 #### Mudando permissões com `chmod`
 
 ```bash
-$ chmod +x script.sh           # torna o arquivo executável
-$ chmod -x script.sh           # remove permissão de execução
-$ chmod 755 script.sh          # modo numérico (avançado — veja seção aprofundada)
+chmod +x script.sh           # torna o arquivo executável
+chmod -x script.sh           # remove permissão de execução
+chmod 755 script.sh          # modo numérico (avançado — veja seção aprofundada)
 ```
 
 Prático: quando você baixa um script `.sh`, geralmente precisa fazer `chmod +x` antes de rodar:
 
 ```bash
-$ ./script.sh                  # ❌ Permission denied
-$ chmod +x script.sh           # dar permissão
-$ ./script.sh                  # ✅ Funciona!
+./script.sh                  # ❌ Permission denied
+chmod +x script.sh           # dar permissão
+./script.sh                  # ✅ Funciona!
 ```
 
 ---
@@ -466,12 +470,12 @@ drwxr-xr-x  2 usuario grupo  4096 mai 15 14:00 Downloads
 Muda o diretório atual.
 
 ```bash
-$ cd Downloads/        # entra na pasta Downloads
-$ cd ..                # volta um nível
-$ cd ../..             # volta dois níveis
-$ cd ~                 # vai direto para o home
-$ cd /etc              # caminho absoluto (começa em /)
-$ cd -                 # volta pro diretório anterior
+cd Downloads/        # entra na pasta Downloads
+cd ..                # volta um nível
+cd ../..             # volta dois níveis
+cd ~                 # vai direto para o home
+cd /etc              # caminho absoluto (começa em /)
+cd -                 # volta pro diretório anterior
 ```
 
 **Caminhos absolutos vs relativos:**
@@ -503,9 +507,9 @@ cd ~                  # ir para home
 #### `mkdir` — Make Directory
 
 ```bash
-$ mkdir projetos                    # cria uma pasta
-$ mkdir projetos/web                # cria dentro de outra (a pasta "projetos" já precisa existir)
-$ mkdir -p projetos/web/src/css     # cria toda a estrutura de uma vez (-p = parents)
+mkdir projetos                    # cria uma pasta
+mkdir projetos/web                # cria dentro de outra (a pasta "projetos" já precisa existir)
+mkdir -p projetos/web/src/css     # cria toda a estrutura de uma vez (-p = parents)
 ```
 
 ### Criando e escrevendo arquivos
@@ -515,16 +519,16 @@ $ mkdir -p projetos/web/src/css     # cria toda a estrutura de uma vez (-p = par
 Cria um arquivo vazio ou atualiza a data de modificação.
 
 ```bash
-$ touch index.html
-$ touch style.css script.js         # vários de uma vez
+touch index.html
+touch style.css script.js         # vários de uma vez
 ```
 
 #### `echo` com redirecionamento
 
 ```bash
-$ echo "Olá, mundo!"                # imprime no terminal
-$ echo "Olá" > saudacao.txt         # escreve em arquivo (sobrescreve)
-$ echo "Linha 2" >> saudacao.txt    # adiciona ao fim do arquivo
+echo "Olá, mundo!"                # imprime no terminal
+echo "Olá" > saudacao.txt         # escreve em arquivo (sobrescreve)
+echo "Linha 2" >> saudacao.txt    # adiciona ao fim do arquivo
 ```
 
 ### Lendo arquivos
@@ -532,16 +536,16 @@ $ echo "Linha 2" >> saudacao.txt    # adiciona ao fim do arquivo
 #### `cat` — Concatenate
 
 ```bash
-$ cat saudacao.txt                  # exibe o conteúdo
-$ cat arq1.txt arq2.txt             # exibe dois arquivos seguidos
+cat saudacao.txt                  # exibe o conteúdo
+cat arq1.txt arq2.txt             # exibe dois arquivos seguidos
 ```
 
 #### `less` e `head` / `tail`
 
 ```bash
-$ less arquivo-grande.txt           # lê com paginação (q para sair)
-$ head -5 arquivo.txt               # primeiras 5 linhas
-$ tail -5 arquivo.txt               # últimas 5 linhas
+less arquivo-grande.txt           # lê com paginação (q para sair)
+head -5 arquivo.txt               # primeiras 5 linhas
+tail -5 arquivo.txt               # últimas 5 linhas
 ```
 
 ### Copiando e movendo
@@ -549,16 +553,16 @@ $ tail -5 arquivo.txt               # últimas 5 linhas
 #### `cp` — Copy
 
 ```bash
-$ cp origem.txt destino.txt         # copia arquivo
-$ cp -r pasta/ pasta-copia/         # copia pasta inteira (-r = recursivo)
+cp origem.txt destino.txt         # copia arquivo
+cp -r pasta/ pasta-copia/         # copia pasta inteira (-r = recursivo)
 ```
 
 #### `mv` — Move / Rename
 
 ```bash
-$ mv arquivo.txt novo-nome.txt      # renomeia
-$ mv arquivo.txt pasta/             # move para outra pasta
-$ mv pasta/ nova-pasta/             # renomeia pasta
+mv arquivo.txt novo-nome.txt      # renomeia
+mv arquivo.txt pasta/             # move para outra pasta
+mv pasta/ nova-pasta/             # renomeia pasta
 ```
 
 ### Removendo
@@ -566,9 +570,9 @@ $ mv pasta/ nova-pasta/             # renomeia pasta
 #### `rm` — Remove
 
 ```bash
-$ rm arquivo.txt                    # remove arquivo
-$ rm -r pasta/                      # remove pasta e todo o conteúdo
-$ rm -i arquivo.txt                 # pede confirmação antes (-i = interactive)
+rm arquivo.txt                    # remove arquivo
+rm -r pasta/                      # remove pasta e todo o conteúdo
+rm -i arquivo.txt                 # pede confirmação antes (-i = interactive)
 ```
 
 > ⚠️ **Atenção:** `rm` no Linux não tem lixeira. O arquivo some de vez. Use com cuidado.
@@ -576,10 +580,10 @@ $ rm -i arquivo.txt                 # pede confirmação antes (-i = interactive
 ### Outros comandos úteis
 
 ```bash
-$ man ls                            # manual completo do comando ls
-$ history                           # histórico de comandos usados
-$ which python3                     # mostra onde está instalado um programa
-$ file imagem.jpg                   # identifica o tipo de um arquivo
+man ls                            # manual completo do comando ls
+history                           # histórico de comandos usados
+which python3                     # mostra onde está instalado um programa
+file imagem.jpg                   # identifica o tipo de um arquivo
 ```
 
 ---
@@ -591,28 +595,28 @@ $ file imagem.jpg                   # identifica o tipo de um arquivo
 ### `find` — procurar arquivos por nome e atributos
 
 ```bash
-$ find . -name "*.txt"              # todos os arquivos .txt a partir de aqui
-$ find ~ -name "foto-*.jpg"         # fotos com padrão específico
-$ find /etc -type f -name "*.conf"  # só arquivos (-type f), não diretórios
-$ find . -type d -name "node_modules"  # procura diretórios específicos
-$ find . -size +10M                 # arquivos maiores que 10MB
+find . -name "*.txt"              # todos os arquivos .txt a partir de aqui
+find ~ -name "foto-*.jpg"         # fotos com padrão específico
+find /etc -type f -name "*.conf"  # só arquivos (-type f), não diretórios
+find . -type d -name "node_modules"  # procura diretórios específicos
+find . -size +10M                 # arquivos maiores que 10MB
 ```
 
 ### `grep` — buscar texto dentro de arquivos
 
 ```bash
-$ grep "erro" arquivo.log           # linhas que contêm "erro"
-$ grep -i "Erro" arquivo.log        # case-insensitive (-i = ignore case)
-$ grep -n "erro" arquivo.log        # mostra número da linha (-n)
-$ grep -r "TODO" .                  # busca recursiva em todas as pastas
-$ grep -v "comentário" codigo.py    # linhas que NÃO contêm a palavra (-v = invert)
+grep "erro" arquivo.log           # linhas que contêm "erro"
+grep -i "Erro" arquivo.log        # case-insensitive (-i = ignore case)
+grep -n "erro" arquivo.log        # mostra número da linha (-n)
+grep -r "TODO" .                  # busca recursiva em todas as pastas
+grep -v "comentário" codigo.py    # linhas que NÃO contêm a palavra (-v = invert)
 ```
 
 ### `locate` — busca rápida (usa um índice)
 
 ```bash
-$ locate python3                    # procura por "python3" em todo o sistema
-$ updatedb                          # atualiza o índice (às vezes precisa)
+locate python3                    # procura por "python3" em todo o sistema
+updatedb                          # atualiza o índice (às vezes precisa)
 ```
 
 > **Dica:** `find` é mais "ao vivo" mas mais lento. `locate` é rápido mas usa cache.
@@ -628,10 +632,11 @@ Até agora usamos `echo` para criar arquivos. Mas quando precisa **editar** um a
 O `nano` é o mais fácil para iniciantes:
 
 ```bash
-$ nano README.md                    # abre para edição
+nano README.md                    # abre para edição
 ```
 
 Dentro do `nano`:
+
 - Digita normalmente
 - `Ctrl + X` → sai (pede pra salvar)
 - `Ctrl + O` → salva
@@ -648,30 +653,15 @@ $ nano meu-arquivo.txt
 # Enter (confirma nome do arquivo)
 ```
 
-### `vim` — editor poderoso (mais difícil)
-
-`vim` é mais complicado, mas infinitamente mais poderoso. Para iniciantes, é meio overkill, mas bom saber:
-
-```bash
-$ vim arquivo.txt
-# Pressiona 'i' para entrar em modo INSERT (digitar)
-# Digita o texto
-# Pressiona 'Esc' para sair de INSERT
-# Digita ':wq' e Enter para salvar e sair
-# Ou ':q!' para sair SEM salvar
-```
-
-> Dica: se entrou no vim sem querer, pressione `Esc` e depois `:q!` para sair sem salvar.
-
 ### Verificar o conteúdo (sem editar)
 
 Se só quer **ler** o arquivo:
 
 ```bash
-$ cat arquivo.txt                   # mostra inteiro
-$ less arquivo.txt                  # mostra com paginação (q para sair)
-$ head -10 arquivo.txt              # primeiras 10 linhas
-$ tail -5 arquivo.txt               # últimas 5 linhas
+cat arquivo.txt                   # mostra inteiro
+less arquivo.txt                  # mostra com paginação (q para sair)
+head -10 arquivo.txt              # primeiras 10 linhas
+tail -5 arquivo.txt               # últimas 5 linhas
 ```
 
 ---
@@ -685,22 +675,22 @@ Um dos **superpoderes** do terminal é encadear comandos — fazer um comando pa
 O pipe (`|`) pega a **saída** de um comando e passa como **entrada** para o próximo:
 
 ```bash
-$ cat arquivo-grande.txt | grep "erro"       # acha linhas com "erro"
-$ ls -la | grep ".txt"                       # lista só arquivos .txt
-$ history | grep "python"                    # vê comandos que usou com python
-$ ps aux | grep "firefox"                    # vê processos Firefox em execução
+cat arquivo-grande.txt | grep "erro"       # acha linhas com "erro"
+ls -la | grep ".txt"                       # lista só arquivos .txt
+history | grep "python"                    # vê comandos que usou com python
+ps aux | grep "firefox"                    # vê processos Firefox em execução
 ```
 
 **Exemplo real:** você tem um arquivo com 1000 linhas e quer contar quantas vezes a palavra "bug" aparece:
 
 ```bash
-$ grep "bug" arquivo.log | wc -l             # 'wc -l' conta linhas
+grep "bug" arquivo.log | wc -l             # 'wc -l' conta linhas
 ```
 
 **Outro exemplo:** listar arquivos `.js` ordenados por tamanho:
 
 ```bash
-$ ls -la | grep "\.js" | sort -k5 -n        # sort ordena por tamanho (coluna 5)
+ls -la | grep "\.js" | sort -k5 -n        # sort ordena por tamanho (coluna 5)
 ```
 
 ### Redirecionamento: `>` e `>>`
@@ -708,10 +698,10 @@ $ ls -la | grep "\.js" | sort -k5 -n        # sort ordena por tamanho (coluna 5)
 Já vimos isso, mas vale reforçar:
 
 ```bash
-$ echo "primeira linha" > arquivo.txt        # cria/sobrescreve
-$ echo "segunda linha" >> arquivo.txt        # adiciona ao fim
-$ cat arquivo-grande.txt > backup.txt        # copia conteúdo (sobrescreve)
-$ grep "erro" sistema.log > erros.txt        # salva resultado em arquivo
+echo "primeira linha" > arquivo.txt        # cria/sobrescreve
+echo "segunda linha" >> arquivo.txt        # adiciona ao fim
+cat arquivo-grande.txt > backup.txt        # copia conteúdo (sobrescreve)
+grep "erro" sistema.log > erros.txt        # salva resultado em arquivo
 ```
 
 ### Encadeamento de comandos: `&&`, `;` e `||`
@@ -751,11 +741,11 @@ Linux tem **gerenciadores de pacotes** — ferramentas que instalam software pra
 ### Estrutura básica
 
 ```bash
-$ sudo apt update                   # atualiza lista de pacotes disponíveis
-$ sudo apt install nome-do-pacote   # instala um pacote
-$ sudo apt remove nome-do-pacote    # desinstala
-$ apt list --installed              # lista pacotes instalados
-$ apt search python                 # busca pacotes com "python" no nome
+sudo apt update                   # atualiza lista de pacotes disponíveis
+sudo apt install nome-do-pacote   # instala um pacote
+sudo apt remove nome-do-pacote    # desinstala
+apt list --installed              # lista pacotes instalados
+apt search python                 # busca pacotes com "python" no nome
 ```
 
 ### Exemplos práticos
@@ -780,9 +770,9 @@ $ sudo apt install nano
 ### Atualizações do sistema
 
 ```bash
-$ sudo apt update                   # sincroniza lista de pacotes
-$ sudo apt upgrade                  # atualiza pacotes já instalados
-$ sudo apt full-upgrade             # atualiza agressivamente (cuidado)
+sudo apt update                   # sincroniza lista de pacotes
+sudo apt upgrade                  # atualiza pacotes já instalados
+sudo apt full-upgrade             # atualiza agressivamente (cuidado)
 ```
 
 ### Outras distribuições
@@ -790,15 +780,15 @@ $ sudo apt full-upgrade             # atualiza agressivamente (cuidado)
 Se você estiver usando **Fedora** ou **Red Hat**:
 
 ```bash
-$ sudo dnf install python3          # dnf é o gerenciador deles
-$ sudo dnf search python
+sudo dnf install python3          # dnf é o gerenciador deles
+sudo dnf search python
 ```
 
 Se está em **Arch Linux**:
 
 ```bash
-$ sudo pacman -S python             # pacman é o gerenciador
-$ sudo pacman -Syu                  # atualiza tudo
+sudo pacman -S python             # pacman é o gerenciador
+sudo pacman -Syu                  # atualiza tudo
 ```
 
 ---
@@ -839,7 +829,7 @@ echo "Feito por: Seu Nome" > meu-projeto/docs/sobre.txt
 ls -R meu-projeto/
 ```
 
-**Desafio extra (quem terminar primeiro):**
+**Desafio extra:**
 
 ```bash
 # Copiar a pasta src/ para src-backup/
@@ -853,6 +843,40 @@ ls -la meu-projeto/src/
 
 # Remover o backup (com confirmação)
 rm -ri meu-projeto/src-backup/
+```
+
+---
+
+## 8a. Bash Scripting (bem básico)
+
+Um script Bash é só um arquivo com vários comandos para executar de uma vez.
+
+Exemplo simples:
+
+```bash
+#!/usr/bin/env bash
+echo "Olá, $USER!"
+echo "Hoje é: $(date '+%d/%m/%Y')"
+```
+
+Salvar como `boas_vindas.sh` e rodar:
+
+```bash
+chmod +x boas_vindas.sh
+./boas_vindas.sh
+```
+
+Exemplo com variável + `if` simples:
+
+```bash
+#!/usr/bin/env bash
+NOME="$1"
+
+if [ -z "$NOME" ]; then
+  echo "Uso: ./saudacao.sh SEU_NOME"
+else
+  echo "Bem-vindo(a), $NOME!"
+fi
 ```
 
 ---
@@ -884,6 +908,8 @@ Working Tree  ──git add──▶  Stage (Index)  ──git commit──▶  
 (seus arquivos)              (preparado)                      (histórico)
 ```
 
+<img src="figuras/github.png" alt="Git Stages" width="400">
+
 ### Prévia dos comandos
 
 ```bash
@@ -894,7 +920,7 @@ git commit -m "msg"   # cria um commit com uma mensagem
 git log --oneline     # vê o histórico de commits
 ```
 
-> Na próxima aula, você vai praticar tudo isso no projeto que acabou de criar.
+> Na próxima aula, você vai colocar tudo isso em prática.
 
 ### Para casa (opcional, mas recomendado)
 
@@ -934,6 +960,7 @@ r-- = 4     = 4
 ```
 
 Então `chmod 755 arquivo` significa:
+
 - **7** (dono): rwx — lê, escreve, executa
 - **5** (grupo): r-x — lê e executa, não escreve
 - **5** (outros): r-x — lê e executa, não escreve
@@ -941,9 +968,9 @@ Então `chmod 755 arquivo` significa:
 Uso comum:
 
 ```bash
-$ chmod 755 script.sh          # executável, mas só o dono modifica
-$ chmod 644 documento.txt      # todos leem, só dono escreve
-$ chmod 600 arquivo-privado    # só o dono acessa
+chmod 755 script.sh          # executável, mas só o dono modifica
+chmod 644 documento.txt      # todos leem, só dono escreve
+chmod 600 arquivo-privado    # só o dono acessa
 ```
 
 ## B. Variáveis de ambiente e PATH
@@ -1015,9 +1042,9 @@ A saída é salva em `nohup.out`.
 ### Redirecionamento de erro
 
 ```bash
-$ comando 2> erros.txt          # redireciona erros (stderr) para arquivo
-$ comando > saida.txt 2>&1      # redireciona saída E erros para arquivo
-$ comando 2> /dev/null          # descarta erros (envia para "nada")
+comando 2> erros.txt          # redireciona erros (stderr) para arquivo
+comando > saida.txt 2>&1      # redireciona saída E erros para arquivo
+comando 2> /dev/null          # descarta erros (envia para "nada")
 ```
 
 ### Pipes encadeados
@@ -1054,7 +1081,7 @@ alias myproject='cd ~/projetos/meu-projeto'
 Depois, digitar `ll` é igual a `ls -la`. Para ativar:
 
 ```bash
-$ source ~/.bashrc              # recarrega o arquivo
+source ~/.bashrc              # recarrega o arquivo
 ```
 
 Ou simplesmente abra um novo terminal.
@@ -1062,10 +1089,10 @@ Ou simplesmente abra um novo terminal.
 ## F. Operadores de busca com `find` — avançado
 
 ```bash
-$ find . -name "*.txt" -o -name "*.md"    # find com OR
-$ find . -type f -not -name "*.tmp"       # arquivos que NÃO são .tmp
-$ find . -mtime -7                        # modificados nos últimos 7 dias
-$ find . -executable -type f              # arquivos executáveis
+find . -name "*.txt" -o -name "*.md"    # find com OR
+find . -type f -not -name "*.tmp"       # arquivos que NÃO são .tmp
+find . -mtime -7                        # modificados nos últimos 7 dias
+find . -executable -type f              # arquivos executáveis
 ```
 
 ## G. Regex — Expressões regulares
@@ -1073,24 +1100,46 @@ $ find . -executable -type f              # arquivos executáveis
 `grep` suporta padrões (regex):
 
 ```bash
-$ grep "^erro" arquivo.log     # linhas que COMEÇAM com "erro"
-$ grep "sucesso$" arquivo.log  # linhas que TERMINAM com "sucesso"
-$ grep "error[0-9]" arquivo    # "error" seguido de qualquer número
-$ grep -E "^(erro|warn)" arquivo   # múltiplos padrões (extended regex)
+grep "^erro" arquivo.log     # linhas que COMEÇAM com "erro"
+grep "sucesso$" arquivo.log  # linhas que TERMINAM com "sucesso"
+grep "error[0-9]" arquivo    # "error" seguido de qualquer número
+grep -E "^(erro|warn)" arquivo   # múltiplos padrões (extended regex)
 ```
 
-## H. Compressão de arquivos
+## H. Compressão de arquivos com `tar`
 
 ```bash
-$ tar -czf arquivo.tar.gz pasta/    # compacta uma pasta (tar + gzip)
-$ tar -tzf arquivo.tar.gz          # lista o que tem dentro
-$ tar -xzf arquivo.tar.gz          # descompacta
+tar -czf arquivo.tar.gz pasta/    # compacta uma pasta (tar + gzip)
+tar -tzf arquivo.tar.gz          # lista o que tem dentro
+tar -xzf arquivo.tar.gz          # descompacta
 
-$ zip -r pasta.zip pasta/          # compacta como .zip
-$ unzip pasta.zip                  # descompacta .zip
+zip -r pasta.zip pasta/          # compacta como .zip
+unzip pasta.zip                  # descompacta .zip
 ```
 
-## I. Links simbólicos (atalhos)
+## I. APIs no terminal com `curl` + `jq`
+
+Quando a resposta vem em JSON, `jq` ajuda a filtrar só o que importa:
+
+```bash
+curl -s "https://api.github.com/repos/torvalds/linux" | jq '.full_name, .stargazers_count'
+# "torvalds/linux"
+# 201234 (exemplo)
+```
+
+Outro exemplo prático (listar nomes de branches):
+
+```bash
+curl -s "https://api.github.com/repos/torvalds/linux/branches?per_page=5" | jq '.[].name'
+```
+
+Se `jq` não estiver instalado:
+
+```bash
+sudo apt install jq
+```
+
+## J. Links simbólicos (atalhos)
 
 ```bash
 $ ln -s /caminho/longo/arquivo.txt atalho.txt
@@ -1098,12 +1147,12 @@ $ ln -s /caminho/longo/arquivo.txt atalho.txt
 # Se mover o arquivo real, o atalho quebra
 ```
 
-## J. Wildcards e expansão
+## K. Wildcards e expansão
 
 ```bash
-$ rm *.log                     # remove todos arquivos .log
-$ cp arquivo.{txt,md,html} backup/  # copia 3 variações
-$ ls [0-9]*                    # lista arquivos que começam com número
+rm *.log                     # remove todos arquivos .log
+cp arquivo.{txt,md,html} backup/  # copia 3 variações
+ls [0-9]*                    # lista arquivos que começam com número
 ```
 
 ---
