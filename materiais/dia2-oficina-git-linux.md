@@ -586,17 +586,18 @@ Use seu nome sem espaços e com letras minúsculas, por exemplo:
 
 ### Passo 3 — Fazer sua contribuição
 
-Adicione uma linha no arquivo `participantes.txt`:
+Crie um arquivo com o seu nome `SEUNOME.txt` na pasta participantes e escreva o que achou da oficina:
 
 ```bash
-echo "Seu Nome — o que achou da oficina" >> participantes.txt
-cat participantes.txt     # verificar
+cd participantes
+echo "Seu Nome — o que achou da oficina" >> SEUNOME.txt
+cat SEUNOME.txt     # verificar
 ```
 
 ### Passo 4 — Commitar e enviar
 
 ```bash
-git add participantes.txt
+git add SEUNOME.txt
 git commit -m "feat: adiciona participante Seu Nome"
 git push origin participante/seu-nome
 ```
