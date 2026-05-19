@@ -486,32 +486,94 @@ ssh-keygen <span class="token parameter variable">-t</span> ed25519 <span class=
 </code></pre><hr>
 <h2 id="7-exercício-final--colaboração-simulada">7. Exercício final — Colaboração simulada </h2>
 <p><strong>O objetivo é simular o fluxo real de contribuição em um projeto open source.</strong></p>
-<p>O repositório da oficina foi criado pelo ministrante e está disponível no GitHub. Cada participante vai:</p>
-<h3 id="passo-1--clonar-o-repositório-da-oficina">Passo 1 — Clonar o repositório da oficina </h3>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">git</span> clone https://github.com/adrianviniciuscs/curso-linuxgit-ecop2026.git
+<p>O repositório da oficina foi criado pelo ministrante e está disponível no GitHub.</p>
+<p>Como os participantes não terão permissão para enviar alterações diretamente para o repositório original, cada um deverá primeiro criar um <strong>fork</strong>.</p>
+<p>Cada participante vai:</p>
+<h3 id="passo-1--fazer-um-fork-do-repositório">Passo 1 — Fazer um fork do repositório </h3>
+<ol>
+<li>
+<p>Acesse o repositório da oficina:</p>
+<p><a href="https://github.com/adrianviniciuscs/curso-linuxgit-ecop2026">https://github.com/adrianviniciuscs/curso-linuxgit-ecop2026</a></p>
+</li>
+<li>
+<p>Clique no botão <strong>Fork</strong>, no canto superior direito.</p>
+</li>
+<li>
+<p>O GitHub criará uma cópia do repositório na sua conta.</p>
+</li>
+</ol>
+<p>Depois do fork, o repositório ficará parecido com:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>https://github.com/SEU-USUARIO/curso-linuxgit-ecop2026
+</code></pre><hr>
+<h3 id="passo-2--clonar-o-seu-fork">Passo 2 — Clonar o seu fork </h3>
+<p>Agora clone o repositório da <strong>sua conta</strong>, não o repositório original:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">git</span> clone https://github.com/SEU-USUARIO/curso-linuxgit-ecop2026.git
 <span class="token builtin class-name">cd</span> curso-linuxgit-ecop2026
 <span class="token function">ls</span>
-</code></pre><h3 id="passo-2--criar-sua-branch">Passo 2 — Criar sua branch </h3>
+</code></pre><p>Substitua <code>SEU-USUARIO</code> pelo seu usuário do GitHub.</p>
+<hr>
+<h3 id="passo-3--criar-sua-branch">Passo 3 — Criar sua branch </h3>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> participante/seu-nome
-</code></pre><p>Use seu nome sem espaços e com letras minúsculas, por exemplo:<br>
-<code>participante/joao-silva</code></p>
-<h3 id="passo-3--fazer-sua-contribuição">Passo 3 — Fazer sua contribuição </h3>
-<p>Crie um arquivo com o seu nome <code>SEUNOME.txt</code> na pasta participantes e escreva o que achou da oficina:</p>
+</code></pre><p>Use seu nome sem espaços e com letras minúsculas, por exemplo:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>participante/joao-silva
+</code></pre><hr>
+<h3 id="passo-4--fazer-sua-contribuição">Passo 4 — Fazer sua contribuição </h3>
+<p>Crie um arquivo com o seu nome <code>SEUNOME.txt</code> na pasta <code>participantes</code> e escreva o que achou da oficina:</p>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token builtin class-name">cd</span> participantes
 <span class="token builtin class-name">echo</span> <span class="token string">"Seu Nome — o que achou da oficina"</span> <span class="token operator">&gt;&gt;</span> SEUNOME.txt
 <span class="token function">cat</span> SEUNOME.txt     <span class="token comment"># verificar</span>
-</code></pre><h3 id="passo-4--commitar-e-enviar">Passo 4 — Commitar e enviar </h3>
+</code></pre><p>Exemplo:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token builtin class-name">echo</span> <span class="token string">"João Silva — achei a oficina muito útil para entender Git e GitHub."</span> <span class="token operator">&gt;&gt;</span> joao-silva.txt
+<span class="token function">cat</span> joao-silva.txt
+</code></pre><hr>
+<h3 id="passo-5--commitar-e-enviar-para-o-seu-fork">Passo 5 — Commitar e enviar para o seu fork </h3>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">git</span> <span class="token function">add</span> SEUNOME.txt
 <span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: adiciona participante Seu Nome"</span>
 <span class="token function">git</span> push origin participante/seu-nome
-</code></pre><h3 id="passo-5-bônus--abrir-um-pull-request">Passo 5 (bônus) — Abrir um Pull Request </h3>
+</code></pre><p>Aqui, o <code>origin</code> aponta para o <strong>seu fork</strong>, ou seja, para a cópia do repositório na sua conta do GitHub.</p>
+<hr>
+<h3 id="passo-6--abrir-um-pull-request">Passo 6 — Abrir um Pull Request </h3>
 <ol>
-<li>Acesse o repositório no GitHub</li>
-<li>Você vai ver um banner: <em>"Compare &amp; pull request"</em></li>
-<li>Clique, adicione uma descrição e abra o PR</li>
-<li>O ministrante vai fazer o merge ao vivo!</li>
+<li>
+<p>Acesse o seu fork no GitHub.</p>
+</li>
+<li>
+<p>Você provavelmente verá um botão chamado <strong>Compare &amp; pull request</strong>.</p>
+</li>
+<li>
+<p>Clique nesse botão.</p>
+</li>
+<li>
+<p>Confira se o Pull Request está indo:</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>de: SEU-USUARIO/curso-linuxgit-ecop2026
+branch: participante/seu-nome
+
+para: adrianviniciuscs/curso-linuxgit-ecop2026
+branch: main
+</code></pre>
+</li>
+<li>
+<p>Adicione uma breve descrição.</p>
+</li>
+<li>
+<p>Clique em <strong>Create pull request</strong>.</p>
+</li>
+<li>
+<p>O ministrante fará o merge ao vivo.</p>
+</li>
 </ol>
 <hr>
+<h3 id="resumo-do-fluxo">Resumo do fluxo </h3>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>Repositório original
+        ↓ fork
+Seu repositório no GitHub
+        ↓ clone
+Seu computador
+        ↓ branch + commit + push
+Seu fork no GitHub
+        ↓ pull request
+Repositório original
+</code></pre><hr>
 <h1 id="referência-rápida">Referência rápida </h1>
 <h2 id="linux">Linux </h2>
 <table>
