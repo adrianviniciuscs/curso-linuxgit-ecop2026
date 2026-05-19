@@ -6,7 +6,7 @@
 
 ### UFERSA — Campus Pau dos Ferros
 
-**ECOP · 17 e 18 de Maio de 2026 · 14h–16h · Laboratório 2 - LTI**
+**ECOP · 17 e 18 de Maio de 2026 · 16h–18h · Laboratório 2 - LTI**
 
 ---
 
@@ -17,21 +17,13 @@
 
 ## Sumário
 
-- [Dia 1 — Linux & Git](#dia-1--linux--git)
-  - [A história do Linux](#1-a-história-do-linux)
-  - [Open source — o que é e por que importa](#2-open-source--o-que-é-e-por-que-importa)
-  - [Distribuições Linux](#3-distribuições-linux)
-  - [Linux no seu computador — opções de uso](#4-linux-no-seu-computador--opções-de-uso)
-  - [O terminal](#5-o-terminal)
-  - [Navegando pelo sistema de arquivos](#6-navegando-pelo-sistema-de-arquivos)
-  - [Manipulando arquivos e diretórios](#7-manipulando-arquivos-e-diretórios)
-  - [Exercício guiado — Organize seu projeto](#8-exercício-guiado--organize-seu-projeto)
-  - [Primeiro contato com Git](#9-primeiro-contato-com-git)
 - [Dia 2 — Git & GitHub](#dia-2--git--github)
   - [Por que controle de versão?](#1-por-que-controle-de-versão)
   - [O ciclo Git](#2-o-ciclo-git)
   - [Repositório local — na prática](#3-repositório-local--na-prática)
+  - [Ignorando arquivos — .gitignore](#3a-ignorando-arquivos--gitignore)
   - [Inspecionando o histórico](#4-inspecionando-o-histórico)
+  - [Desfazendo coisas](#4a-desfazendo-coisas)
   - [Branches](#5-branches)
   - [GitHub — indo para a nuvem](#6-github--indo-para-a-nuvem)
   - [Exercício final — Colaboração simulada](#7-exercício-final--colaboração-simulada)
@@ -70,7 +62,7 @@ Isso é controle de versão manual — e não escala. Problemas:
 
 | Problema | Solução com Git |
 |---|---|
-| "Estraguei tudo e não consigo voltar" | `git checkout` para qualquer commit anterior |
+| "Estraguei tudo e não consigo voltar" | `git revert` para desfazer commits com segurança |
 | "Não sei o que mudou desde ontem" | `git diff` e `git log` |
 | "Não consigo trabalhar com mais pessoas" | Branches + merge + pull requests |
 | "Onde está a versão que funcionava na demo?" | Tags e hash de commits |
@@ -217,6 +209,66 @@ git commit -m "feat: adiciona conteúdo básico ao index.html"
 
 ---
 
+## 3a. Ignorando arquivos — `.gitignore`
+
+Nem todo arquivo do projeto precisa ser versionado. Builds, dependências instaladas, arquivos com senhas — o Git deve ignorar esses.
+
+O `.gitignore` é um arquivo de texto onde você lista padrões de arquivos que o Git deve ignorar completamente.
+
+### Criando um `.gitignore`
+
+```bash
+touch .gitignore
+nano .gitignore
+```
+
+### Padrões comuns
+
+```gitignore
+# Dependências (Node.js)
+node_modules/
+
+# Builds
+dist/
+build/
+*.min.js
+
+# Variáveis de ambiente e senhas — NUNCA versione isso
+.env
+.env.local
+*.key
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos do editor
+.vscode/
+.idea/
+*.swp
+```
+
+### Testando se funciona
+
+```bash
+echo "minha-senha-secreta" > .env
+git status              # .env aparece como untracked
+
+echo ".env" >> .gitignore
+git status              # .env sumiu da lista!
+
+git add .gitignore
+git commit -m "chore: adiciona .gitignore"
+```
+
+> **Regra de ouro:** nunca commite arquivos `.env` ou com credenciais. Se já commitou acidentalmente, a senha deve ser considerada comprometida e trocada imediatamente.
+
+### Templates prontos
+
+Ao criar um repositório no GitHub, você pode escolher um template de `.gitignore` para sua linguagem — ele já vem configurado com os padrões mais comuns.
+
+---
+
 ## 4. Inspecionando o histórico
 
 ### `git log`
@@ -257,6 +309,51 @@ git show a3f2c1d            # detalha um commit específico
 
 ---
 
+## 4a. Desfazendo coisas
+
+Um dos maiores medos de iniciantes é "fazer algo errado e não conseguir voltar". Git foi feito exatamente para isso.
+
+### `git restore` — descarta mudanças não commitadas
+
+```bash
+git restore arquivo.txt       # descarta mudanças em um arquivo específico
+git restore .                 # descarta mudanças em todos os arquivos
+git restore --staged arquivo  # tira um arquivo do stage (sem perder as mudanças)
+```
+
+### `git revert` — desfaz um commit de forma segura
+
+`git revert` cria um *novo commit* que desfaz as mudanças de um commit anterior. O histórico fica preservado — ideal para projetos compartilhados.
+
+```bash
+git log --oneline
+# a3f2c1d feat: adiciona seção de contato
+# 9b1e4f0 docs: atualiza README
+
+git revert a3f2c1d            # abre o editor para confirmar a mensagem
+git revert a3f2c1d --no-edit  # aceita a mensagem padrão automaticamente
+```
+
+### `git reset` — move o HEAD (use com cuidado)
+
+`git reset` é mais poderoso e desfaz o histórico. Deve ser usado **apenas em commits locais** que ainda não foram enviados ao GitHub.
+
+```bash
+git reset --soft HEAD~1     # desfaz o último commit, mantém arquivos no stage
+git reset --mixed HEAD~1    # desfaz o último commit, tira do stage (padrão)
+git reset --hard HEAD~1     # ⚠️ desfaz o commit E descarta todas as mudanças
+```
+
+| Opção | Commit desfeito | Stage | Arquivos |
+|---|---|---|---|
+| `--soft` | ✓ | mantido | mantido |
+| `--mixed` | ✓ | limpo | mantido |
+| `--hard` | ✓ | limpo | **descartado** |
+
+> **Regra prática:** `git revert` para branches compartilhadas (o que foi ao GitHub). `git reset` apenas para commits locais que ainda não saíram da sua máquina.
+
+---
+
 ## 5. Branches
 
 ### O que são branches?
@@ -279,16 +376,24 @@ feature:              D ── E ────
 ```bash
 git branch                          # lista todas as branches
 git branch nova-feature             # cria uma nova branch
-git checkout nova-feature           # muda para a branch
-git checkout -b outra-feature       # cria E já muda (atalho)
+git switch nova-feature             # muda para a branch (comando moderno)
+git switch -c outra-feature         # cria E já muda (comando moderno)
 git branch -d nome                  # deleta a branch (após merge)
+```
+
+> **Nota:** `git checkout` ainda funciona para trocar de branch, mas desde o Git 2.23 (2019) o `git switch` é o comando preferido — ele é mais claro e faz só uma coisa.
+
+```bash
+# equivalentes antigos (ainda funcionam)
+git checkout nova-feature           # igual a git switch
+git checkout -b outra-feature       # igual a git switch -c
 ```
 
 ### Prática com branches
 
 ```bash
 # Criar uma branch para desenvolver uma nova seção
-git checkout -b feature/contato
+git switch -c feature/contato
 
 # Fazer alterações nessa branch
 echo "<h2>Contato</h2>" >> src/index.html
@@ -302,7 +407,7 @@ git commit -m "feat: adiciona seção de contato"
 git log --oneline --graph --all
 
 # Voltar para a main
-git checkout main
+git switch main
 
 # Verificar: a alteração NÃO está na main ainda
 cat src/index.html
@@ -352,6 +457,56 @@ conteúdo da branch que está sendo mergeada
 6. Clique em **Create repository**
 
 O GitHub vai mostrar os comandos. Siga a segunda opção (*"push an existing repository"*):
+
+### Autenticação — como o GitHub te identifica
+
+Desde agosto de 2021, o GitHub **não aceita mais senha** para operações via terminal. Há duas formas de autenticar:
+
+#### Opção 1 — Personal Access Token (mais simples para começar)
+
+1. GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)**
+2. Clique em **Generate new token**, dê um nome e marque a permissão `repo`
+3. Copie o token gerado (ele só aparece uma vez)
+4. Use esse token *no lugar da senha* quando o terminal pedir:
+
+```bash
+git push origin main
+# Username: seu-usuario-github
+# Password: <cole o token aqui — NÃO sua senha normal>
+```
+
+Para não precisar digitar toda vez:
+
+```bash
+git config --global credential.helper store   # salva em arquivo (persistente)
+# ou
+git config --global credential.helper cache   # salva temporariamente (15 min)
+```
+
+#### Opção 2 — Chave SSH (recomendada para uso contínuo)
+
+```bash
+# 1. Gerar o par de chaves
+ssh-keygen -t ed25519 -C "seu@email.com"
+# pressione Enter nas perguntas para aceitar os padrões
+
+# 2. Copiar a chave pública
+cat ~/.ssh/id_ed25519.pub
+# Copie toda a saída
+
+# 3. Adicionar no GitHub: Settings → SSH and GPG keys → New SSH key
+#    Cole o conteúdo copiado acima
+```
+
+Com SSH configurada, use a URL SSH ao adicionar o remote:
+
+```bash
+git remote add origin git@github.com:seu-usuario/meu-projeto.git
+```
+
+> **Para a oficina:** use o Personal Access Token — é mais rápido de configurar agora. Para o dia a dia, vale configurar SSH uma vez e nunca mais precisar digitar credenciais.
+
+---
 
 ### Conectando o repositório local ao GitHub
 
@@ -415,8 +570,8 @@ O repositório da oficina foi criado pelo ministrante e está disponível no Git
 ### Passo 1 — Clonar o repositório da oficina
 
 ```bash
-git clone https://github.com/[usuario-do-ministrante]/oficina-ufersa.git
-cd oficina-ufersa
+git clone https://github.com/adrianviniciuscs/curso-linuxgit-ecop2026.git
+cd curso-linuxgit-ecop2026
 ls
 ```
 
@@ -497,10 +652,15 @@ git push origin participante/seu-nome
 | `git diff` | Mostra mudanças não staged |
 | `git diff --staged` | Mostra mudanças staged |
 | `git show` | Detalha o último commit |
+| `git restore arquivo` | Descarta mudanças não commitadas |
+| `git restore --staged arquivo` | Tira arquivo do stage |
+| `git revert hash` | Desfaz commit (seguro, preserva histórico) |
+| `git reset --soft HEAD~1` | Desfaz commit, mantém stage |
+| `git reset --hard HEAD~1` | Desfaz commit e descarta mudanças |
 | `git branch` | Lista branches |
 | `git branch nome` | Cria uma nova branch |
-| `git checkout nome` | Muda para a branch |
-| `git checkout -b nome` | Cria e já muda de branch |
+| `git switch nome` | Muda para a branch (moderno) |
+| `git switch -c nome` | Cria e já muda de branch (moderno) |
 | `git merge nome` | Faz merge na branch atual |
 | `git branch -d nome` | Deleta uma branch |
 | `git remote add origin URL` | Conecta ao repositório remoto |
@@ -540,12 +700,11 @@ Você saiu da oficina sabendo usar o terminal e versionar projetos com Git. O qu
 
 Quando o básico estiver confortável, explore:
 
-- `.gitignore` — quais arquivos o Git deve ignorar
-- `git stash` — guardar alterações temporariamente
-- `git revert` — desfazer um commit de forma segura
-- `git rebase` — reescrever histórico (use com cuidado)
-- GitHub Actions — automatizar testes e deploys
-- Conventional Commits — padrão de mensagens de commit
+- `git stash` — guardar alterações temporariamente sem commitar
+- `git rebase` — reescrever histórico de forma mais limpa (use com cuidado)
+- `git cherry-pick` — aplicar um commit específico em outra branch
+- GitHub Actions — automatizar testes e deploys (CI/CD)
+- Conventional Commits — padrão de mensagens de commit (`feat:`, `fix:`, `chore:`...)
 
 ### Próximo nível em Linux
 
