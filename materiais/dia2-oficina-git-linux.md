@@ -560,33 +560,64 @@ Um **Pull Request** é uma solicitação para que suas alterações (de uma bran
 ```
 
 ---
-
 ## 7. Exercício final — Colaboração simulada
 
 **O objetivo é simular o fluxo real de contribuição em um projeto open source.**
 
-O repositório da oficina foi criado pelo ministrante e está disponível no GitHub. Cada participante vai:
+O repositório da oficina foi criado pelo ministrante e está disponível no GitHub.
 
-### Passo 1 — Clonar o repositório da oficina
+Como os participantes não terão permissão para enviar alterações diretamente para o repositório original, cada um deverá primeiro criar um **fork**.
+
+Cada participante vai:
+
+### Passo 1 — Fazer um fork do repositório
+
+1. Acesse o repositório da oficina:
+
+   <https://github.com/adrianviniciuscs/curso-linuxgit-ecop2026>
+
+2. Clique no botão **Fork**, no canto superior direito.
+3. O GitHub criará uma cópia do repositório na sua conta.
+
+Depois do fork, o repositório ficará parecido com:
+
+```text
+https://github.com/SEU-USUARIO/curso-linuxgit-ecop2026
+```
+
+---
+
+### Passo 2 — Clonar o seu fork
+
+Agora clone o repositório da **sua conta**, não o repositório original:
 
 ```bash
-git clone https://github.com/adrianviniciuscs/curso-linuxgit-ecop2026.git
+git clone https://github.com/SEU-USUARIO/curso-linuxgit-ecop2026.git
 cd curso-linuxgit-ecop2026
 ls
 ```
 
-### Passo 2 — Criar sua branch
+Substitua `SEU-USUARIO` pelo seu usuário do GitHub.
+
+---
+
+### Passo 3 — Criar sua branch
 
 ```bash
 git checkout -b participante/seu-nome
 ```
 
 Use seu nome sem espaços e com letras minúsculas, por exemplo:
-`participante/joao-silva`
 
-### Passo 3 — Fazer sua contribuição
+```text
+participante/joao-silva
+```
 
-Crie um arquivo com o seu nome `SEUNOME.txt` na pasta participantes e escreva o que achou da oficina:
+---
+
+### Passo 4 — Fazer sua contribuição
+
+Crie um arquivo com o seu nome `SEUNOME.txt` na pasta `participantes` e escreva o que achou da oficina:
 
 ```bash
 cd participantes
@@ -594,7 +625,16 @@ echo "Seu Nome — o que achou da oficina" >> SEUNOME.txt
 cat SEUNOME.txt     # verificar
 ```
 
-### Passo 4 — Commitar e enviar
+Exemplo:
+
+```bash
+echo "João Silva — achei a oficina muito útil para entender Git e GitHub." >> joao-silva.txt
+cat joao-silva.txt
+```
+
+---
+
+### Passo 5 — Commitar e enviar para o seu fork
 
 ```bash
 git add SEUNOME.txt
@@ -602,13 +642,44 @@ git commit -m "feat: adiciona participante Seu Nome"
 git push origin participante/seu-nome
 ```
 
-### Passo 5 (bônus) — Abrir um Pull Request
+Aqui, o `origin` aponta para o **seu fork**, ou seja, para a cópia do repositório na sua conta do GitHub.
 
-1. Acesse o repositório no GitHub
-2. Você vai ver um banner: *"Compare & pull request"*
-3. Clique, adicione uma descrição e abra o PR
-4. O ministrante vai fazer o merge ao vivo!
+---
 
+### Passo 6 — Abrir um Pull Request
+
+1. Acesse o seu fork no GitHub.
+2. Você provavelmente verá um botão chamado **Compare & pull request**.
+3. Clique nesse botão.
+4. Confira se o Pull Request está indo:
+
+   ```text
+   de: SEU-USUARIO/curso-linuxgit-ecop2026
+   branch: participante/seu-nome
+
+   para: adrianviniciuscs/curso-linuxgit-ecop2026
+   branch: main
+   ```
+
+5. Adicione uma breve descrição.
+6. Clique em **Create pull request**.
+7. O ministrante fará o merge ao vivo.
+
+---
+
+### Resumo do fluxo
+
+```text
+Repositório original
+        ↓ fork
+Seu repositório no GitHub
+        ↓ clone
+Seu computador
+        ↓ branch + commit + push
+Seu fork no GitHub
+        ↓ pull request
+Repositório original
+```
 ---
 
 # Referência rápida
